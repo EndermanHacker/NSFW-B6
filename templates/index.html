@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>توليد الصور AI</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 30px auto; text-align: center; }
+  input[type=text] { width: 80%; padding: 10px; margin-bottom: 10px; }
+  button { padding: 10px 20px; font-size: 16px; }
+  #loading { display: none; margin: 20px auto; border: 5px solid #f3f3f3; border-top: 5px solid #555; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+  img { max-width: 100%; margin-top: 20px; border: 1px solid #ddd; }
+  label { font-size: 18px; }
+</style>
+<script>
+function onSubmit() {
+  document.getElementById('loading').style.display = 'block';
+  return true;
+}
+</script>
+</head>
+<body>
+<h1>توليد الصور AI</h1>
+<form method="POST" onsubmit="return onSubmit()">
+  <input type="text" name="prompt" placeholder="أدخل الوصف هنا..." required />
+  <br/>
+  <label><input type="checkbox" name="nsfw" /> تفعيل NSFW</label>
+  <br/><br/>
+  <button type="submit">توليد</button>
+</form>
+<div id="loading"></div>
+{% if img_src %}
+  <img src="{{ img_src }}" alt="Generated Image" />
+{% endif %}
+{% if error %}
+  <p style="color:red;">{{ error }}</p>
+{% endif %}
+</body>
+</html>
